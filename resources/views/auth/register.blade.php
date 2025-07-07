@@ -2,11 +2,39 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
+        <!-- user Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="user name" :value="__('User Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+        <br>
+        <!-- full Name -->
+        <div>
+            <x-input-label for="full name" :value="__('Full Name')" />
+            <x-text-input id="fullName" class="block mt-1 w-full" type="text" name="fullName" :value="old('fullName')"  autofocus autocomplete="name" />
+
+        </div>
+        <br>
+        <!-- birth day -->
+        <div>
+            <x-input-label for="birth day" :value="__('Birth Day')" />
+            <x-text-input id="birthDay" class="block mt-1 w-full" type="date" name="birthDay" :value="old('birthDay')"  autofocus autocomplete="name" />
+
+        </div>
+        <br>
+        <!-- job title -->
+        <div>
+            <x-input-label for="job title" :value="__('Job Title')" />
+            <x-text-input id="jobTitle" class="block mt-1 w-full" type="text" name="jobTitle" :value="old('jobTitle')"  autofocus autocomplete="name" />
+
+        </div>
+        <br>
+        <!-- monthly salary -->
+        <div>
+            <x-input-label for="monthly salary" :value="__('Monthly Salary')" />
+            <x-text-input id="monthlySalary" class="block mt-1 w-full" type="text" name="monthlySalary" :value="old('monthlySalary')"  autofocus autocomplete="name" />
+
         </div>
 
         <!-- Email Address -->
@@ -47,6 +75,7 @@
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
+
         </div>
     </form>
 </x-guest-layout>

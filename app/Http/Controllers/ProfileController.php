@@ -30,7 +30,12 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+
         }
+        $request->user()->full_name = $request->get('fullName');
+        $request->user()->birth_date = $request->get('birthDay');
+        $request->user()->job_title = $request->get('jobTitle');
+        $request->user()->monthly_salary = $request->get('monthlySalary');
 
         $request->user()->save();
 

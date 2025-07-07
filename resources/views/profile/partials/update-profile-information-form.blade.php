@@ -18,8 +18,28 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="user name" :value="__('User Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-input-label for="fullName" :value="__('Full Name')" />
+            <x-text-input id="fullName" name="fullName" type="text" class="mt-1 block w-full" :value="old('fullName', $user->full_name)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-input-label for="birthday" :value="__('Birth Day')" />
+            <x-text-input id="birthDay" name="birthDay" type="date" class="mt-1 block w-full" :value="old('birthDay', $user->birth_date)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-input-label for="job title" :value="__('Job Title')" />
+            <x-text-input id="jobTitle" name="jobTitle" type="text" class="mt-1 block w-full" :value="old('jobTitle', $user->job_title)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-input-label for="monthly salary" :value="__('Monthly Salary')" />
+            <x-text-input id="monthlySalary" name="monthlySalary" type="text" class="mt-1 block w-full" :value="old('monthlySalary', $user->monthly_salary)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
