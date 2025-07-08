@@ -69,6 +69,11 @@
                     @include('profile.partials.add-new-income-type')
                 </div>
             </div>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-full">
+                    @include('profile.partials.upadate-income-type')
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
