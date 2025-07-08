@@ -34,68 +34,41 @@
 
     </div>
 
-
     <div class="relative overflow-x-auto z-0 w-full mb-5 group">
         <table class="w-full text-sm text-left rtl:text-right text-gray-900 dark:text-gray-900">
             <thead class="text-xs text-gray-900 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Product name
+                    Income Type
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Color
+                    Max Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Category
+                    Min Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
+                    Income Type Id
                 </th>
             </tr>
             </thead>
             <tbody>
+            @foreach($allIncomeData as $allIncomeTypes)
             <tr class="bg-white border-b dark:bg-gray-100 dark:border-gray-700 border-gray-200">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900">
-                    Apple MacBook Pro 17"
+                    {{$allIncomeTypes->income_type}}
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{$allIncomeTypes->max_amount}}
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
+                    {{$allIncomeTypes->min_amount}}
                 </td>
                 <td class="px-6 py-4">
-                    $2999
+                    {{$allIncomeTypes->id}}
                 </td>
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-100 dark:border-gray-700 border-gray-200">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900">
-                    Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">
-                    White
-                </td>
-                <td class="px-6 py-4">
-                    Laptop PC
-                </td>
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-100">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900">
-                    Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">
-                    Black
-                </td>
-                <td class="px-6 py-4">
-                    Accessories
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-            </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
