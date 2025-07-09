@@ -42,7 +42,7 @@
                         {{$allIncomeTypes->id}}
                     </td>
                     <td class="px-6 py-4">
-                        <button data-id="{{' '. $allIncomeTypes->id }}"
+                        <button data-id="{{$allIncomeTypes->id }}"
                                 data-income_type="{{ $allIncomeTypes->income_type }}"
                                 data-max_amount="{{ $allIncomeTypes->max_amount }}"
                                 data-min_amount="{{ $allIncomeTypes->min_amount }}"
@@ -64,6 +64,8 @@
                     <!-- Modal content -->
                     <div class="relative rounded-lg shadow-sm dark:bg-blue-100">
                         <!-- Modal header -->
+                        <form action="{{Route('incomeType.update')}}" method="post">
+                            @csrf
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                             <h3 id="incomeTypeNameHeader" class="text-xl font-semibold dark:text-gray-900">
 
@@ -96,13 +98,18 @@
                                     <input type="number" name="minAmount" id="minAmount" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                     <label for="min-amount" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Min Amount</label>
                                 </div>
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <input type="hidden" name="incomeId" id="incomeId" required />
+
+                                </div>
                             </div>
                         </div>
                         <!-- Modal footer -->
                         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="IncomeTypeEditModel" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                            <button data-modal-hide="IncomeTypeEditModel" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
                             <button data-modal-hide="IncomeTypeEditModel" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cansel</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -118,6 +125,7 @@
             document.getElementById('incomeType').value = button.getAttribute('data-income_type');
             document.getElementById('maxAmount').value = button.getAttribute('data-max_amount');
             document.getElementById('minAmount').value = button.getAttribute('data-min_amount');
+            document.getElementById('incomeId').value = button.getAttribute('data-id');
         }
 
     </script>
