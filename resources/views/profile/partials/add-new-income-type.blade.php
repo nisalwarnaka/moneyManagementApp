@@ -12,7 +12,7 @@
         </p>
         <br>
 
-        <form action="{{Route('incometype.add')}}" method="post">
+        <form action="{{Route('incomeType.add')}}" method="post">
             @csrf
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="income_type" id="income_type" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -34,7 +34,7 @@
 
     </div>
 
-    <div class="relative overflow-x-auto z-0 w-full mb-5 group">
+    <div class="relative overflow-x-auto z-0 w-full mb-5 group max-h-60 ">
         <table class="w-full text-sm text-left rtl:text-right text-gray-900 dark:text-gray-900">
             <thead class="text-xs text-gray-900 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
             <tr>
