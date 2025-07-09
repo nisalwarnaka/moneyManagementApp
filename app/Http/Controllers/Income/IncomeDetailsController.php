@@ -16,7 +16,9 @@ class IncomeDetailsController extends Controller
     public function index():view
     {
 
-        $allIncomeData = Incometype::all();
+        $allIncomeData = Incometype::all()->pluck('id');
+
+        Log::info($allIncomeData);
         return view('income.income-details',compact('allIncomeData'));
 
     }
@@ -25,14 +27,17 @@ class IncomeDetailsController extends Controller
 
         $validatedIncomeRequest = $request->validated();
 
+        if (Incometype::where('income_type', $validatedIncomeRequest['income_type'])->exists()) {
+            return redirect()->back()->with('message', 'Income type already exists.');
+        }
+
         Incometype::create([
             'income_type' => $validatedIncomeRequest['income_type'],
             'max_amount' => $validatedIncomeRequest['max_amount'],
             'min_amount' => $validatedIncomeRequest['min_amount']
-
         ]);
 
-       // return redirect('/income')->with('message','Income-Type-Added-Successfully');
+        return redirect()->back()->with('message', 'Income type added successfully.');
 
     }
 
