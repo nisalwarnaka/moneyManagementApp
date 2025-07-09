@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static where(string $string, mixed $income_type)
+ * @method static create(array $array)
+ */
 class Incometype extends Model
 {
     protected $table = 'income_types';
