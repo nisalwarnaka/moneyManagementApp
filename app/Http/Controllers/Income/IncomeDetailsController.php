@@ -65,5 +65,15 @@ class IncomeDetailsController extends Controller
 
     }
 
+    public function delete(Request $request): string
+    {
+
+        $id = $request->get('incomeIdDelete');
+
+        Incometype::destroy($id);
+
+        return redirect()->back()->with('message', 'Income-type-delete-successfully.');
+    }
+
 }
 
