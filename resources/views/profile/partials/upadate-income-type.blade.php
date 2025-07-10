@@ -49,7 +49,8 @@
                                 data-modal-target="IncomeTypeEditModel" data-modal-toggle="IncomeTypeEditModel" onclick="openEditModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                     </td>
                     <td class="px-6 py-4">
-                        <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                        <button data-id="{{$allIncomeTypes->id }}"
+                                data-income_type="{{ $allIncomeTypes->income_type }}" data-modal-target="IncomeTypeDeleteModel" data-modal-toggle="IncomeTypeDeleteModel" onclick="openDeleteModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
                     </td>
 
 
@@ -58,7 +59,7 @@
                 </tbody>
             </table>
 
-            <!-- Main modal -->
+            <!-- Main modal --> EditModel
             <div id="IncomeTypeEditModel" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-2xl max-h-full">
                     <!-- Modal content -->
@@ -114,19 +115,37 @@
                 </div>
             </div>
 
+            <form action="">
+                @csrf
+            <div id="IncomeTypeDeleteModel" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <div class="relative bg-white rounded-lg shadow-sm dark:bg-red-500">
+                        <button type="button" class="absolute top-3 end-2.5 text-white bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="IncomeTypeDeleteModel">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="p-4 md:p-5 text-center">
+                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-white">Are you sure you want to delete this<br><span id="incomeTypeShowInHeader"></span><span class="dark:text-red-500"> -</span>: <span id="incomeIdShowInHeader"></span><br> Income Type ?</h3>
+
+                            <input type="hidden" name="incomeIdDelete" id="incomeIdDelete" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+
+                            <button data-modal-hide="IncomeTypeDeleteModel" type="button" class="text-white bg-red-700  dark:border-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                Delete
+                            </button>
+                            <button data-modal-hide="IncomeTypeDeleteModel" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-white dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+
         </div>
     </div>
-
-    <script>
-
-        function openEditModal(button){
-            document.getElementById('incomeTypeIdHeader').textContent = button.getAttribute('data-id');
-            document.getElementById('incomeTypeNameHeader').textContent = button.getAttribute('data-income_type');
-            document.getElementById('incomeType').value = button.getAttribute('data-income_type');
-            document.getElementById('maxAmount').value = button.getAttribute('data-max_amount');
-            document.getElementById('minAmount').value = button.getAttribute('data-min_amount');
-            document.getElementById('incomeId').value = button.getAttribute('data-id');
-        }
-
-    </script>
+    <script src="{{ asset('js/incomeTypeUpdateModelHandler.js') }}"></script>
 </section>
