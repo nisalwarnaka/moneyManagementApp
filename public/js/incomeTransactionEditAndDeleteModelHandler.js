@@ -8,11 +8,11 @@ function openIncomeTransactionEditModal(button){
     document.getElementById('incomeTransactionId').value = button.getAttribute('data-transaction-id');
 }
 
-function openDeleteModal(button)
+function openIncomeTransactionDeleteModal(button)
 {
-    document.getElementById('incomeTypeShowInHeader').textContent = button.getAttribute('data-income_type');
-    document.getElementById('incomeIdShowInHeader').textContent = button.getAttribute('data-id');
-    document.getElementById('incomeIdDelete').value = button.getAttribute('data-id');
+    document.getElementById('incomeTransactionTypeForText').textContent = button.getAttribute('data-income-type');
+    document.getElementById('incomeTransactionIdForText').textContent = button.getAttribute('data-transaction-id');
+    document.getElementById('incomeTransactionIdForDelete').value = button.getAttribute('data-transaction-id');
 }
 
 
