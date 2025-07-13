@@ -11,7 +11,7 @@ use App\Models\IncomeValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use App\Models\Incometype;
+use App\Models\IncomeType;
 use function Laravel\Prompts\select;
 
 class IncomeDetailsController extends Controller
@@ -20,12 +20,12 @@ class IncomeDetailsController extends Controller
     public function index():view
     {
 
-        $allIncomeData = Incometype::all();
+        $allIncomeData = IncomeType::all();
         $allIncomeTransactionsData = IncomeValue::all();
         $results = IncomeValue::all();
-        //$allIncomeData = Incometype::all()->pluck('id');
+        //$allIncomeData = IncomeType::all()->pluck('id');
 
-        Log::info($allIncomeData);
+        //Log::info($allIncomeData);
         return view('income.income-details',compact('allIncomeData','allIncomeTransactionsData','results'));
 
     }
@@ -35,11 +35,11 @@ class IncomeDetailsController extends Controller
 
         $validatedIncomeRequest = $request->validated();
 
-        if (Incometype::where('income_type', $validatedIncomeRequest['income_type'])->exists()) {
+        if (IncomeType::where('income_type', $validatedIncomeRequest['income_type'])->exists()) {
             return redirect()->back()->with('message', 'fail !! Income-type-already-exists.');
         }
 
-        Incometype::create([
+        IncomeType::create([
             'income_type' => $validatedIncomeRequest['income_type'],
             'max_amount' => $validatedIncomeRequest['max_amount'],
             'min_amount' => $validatedIncomeRequest['min_amount']
@@ -53,13 +53,13 @@ class IncomeDetailsController extends Controller
     {
         $validatedIncomeRequest = $request->validated();
 
-        if (Incometype::where('income_type', $validatedIncomeRequest['incomeType'])->exists()) {
+        if (IncomeType::where('income_type', $validatedIncomeRequest['incomeType'])->exists()) {
 
             return redirect()->back()->with('message', 'Update Fail !! Income-type-already-exists.');
         }
 
 
-        Incometype::where('id', $validatedIncomeRequest['incomeId'])->update([
+        IncomeType::where('id', $validatedIncomeRequest['incomeId'])->update([
             'income_type' => $validatedIncomeRequest['incomeType'],
             'max_amount' => $validatedIncomeRequest['maxAmount'],
             'min_amount' => $validatedIncomeRequest['minAmount']
@@ -74,7 +74,7 @@ class IncomeDetailsController extends Controller
 
         $id = $request->get('incomeIdDelete');
 
-        Incometype::destroy($id);
+        IncomeType::destroy($id);
 
         return redirect()->back()->with('message', 'Income-type-delete-successfully.');
     }
@@ -113,7 +113,7 @@ class IncomeDetailsController extends Controller
            $query->whereDate('created_at', $findTransactionDate);
        }
        $results = $query->get();
-       $allIncomeData = Incometype::all();
+       $allIncomeData = IncomeType::all();
        $allIncomeTransactionsData = IncomeValue::all();
 
        return view('income.income-details',compact('results', 'allIncomeData','allIncomeTransactionsData'));
