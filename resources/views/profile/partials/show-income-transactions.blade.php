@@ -96,7 +96,11 @@
                                 {{$filteredResult->id}}
                             </td>
                             <td class="px-6 py-4">
-                                <button data-modal-target="IncomeEditModel" data-modal-toggle="IncomeEditModel" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button >
+                                <button data-transaction-id="{{$filteredResult->id}}"
+                                        data-income-type="{{$filteredResult->income_type}}"
+                                        data-income-value="{{$filteredResult->income_value}}"
+                                        data-transaction-month="{{$filteredResult->month}}"
+                                        data-special-note="{{$filteredResult->special_note}}" data-modal-target="IncomeEditModel" data-modal-toggle="IncomeEditModel" onclick="openIncomeTransactionEditModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button >
                             </td>
                             <td class="px-6 py-4">
                                 <button data-modal-target="IncomeDeleteModel" data-modal-toggle="IncomeDeleteModel" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
@@ -116,16 +120,16 @@
                     <!-- Modal content -->
                     <div class="relative rounded-lg shadow-sm dark:bg-blue-100">
                         <!-- Modal header -->
-                        <form action="" method="post">
+                        <form action="{{Route('incomeTransactionUpdate.update')}}" method="post">
                             @csrf
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                                <h3 id="" class="text-xl font-semibold dark:text-gray-900">
+                                <h3 id="incomeTypeHeaderForEditIncome" class="text-xl font-semibold dark:text-gray-900">
 
                                 </h3>
                                 <h3 class="text-xl font-semibold dark:text-blue-100">
                                     ----
                                 </h3>
-                                <h3 id="" class="text-xl font-semibold dark:text-gray-900">
+                                <h3 id="incomeTypeIdHeaderForEditIncome" class="text-xl font-semibold dark:text-gray-900">
 
                                 </h3>
                                 <button type="button" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="IncomeEditModel">
@@ -137,24 +141,38 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4 md:p-5 space-y-4">
-                                <div class="relative z-0 w-full mb-5 group">
-                                    <input type="text" name="" id="" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-blue-400 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                    <label for="" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Income Type</label>
-                                </div>
+
                                 <div class="grid md:grid-cols-2 md:gap-6">
                                     <div class="relative z-0 w-full mb-5 group">
-                                        <input type="number" name="" id="" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                        <label for="" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Max Amount</label>
+                                        <input type="number" name="incomeTransactionValue" id="incomeTransactionValue" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                        <label for="incomeTransactionValue" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Transaction Value</label>
                                     </div>
                                     <div class="relative z-0 w-full mb-5 group">
-                                        <input type="number" name="" id="" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                        <label for="" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Min Amount</label>
-                                    </div>
-                                    <div class="relative z-0 w-full mb-5 group">
-                                        <input type="text" name="" id="" required />
+                                        <select name="incomeTransactionMonth" id="incomeTransactionMonth" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" >
 
+                                            <option value="" >Month</option>
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+                                        </select>
                                     </div>
+
                                 </div>
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <textarea id="incomeTransactionSpecialNote" name="incomeTransactionSpecialNote" rows="4" class="block p-2.5 w-full text-sm rounded-lg border  focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-900 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Special Note"></textarea>
+                                    <input type="text" id="incomeType" name="incomeType" >
+                                    <input type="text" id="incomeTransactionId" name="incomeTransactionId">
+
+                                </div>
+
                             </div>
                             <!-- Modal footer -->
                             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -198,5 +216,5 @@
 
         </div>
     </div>
-    <script src="{{ asset('js/incomeTypeUpdateModelHandler.js') }}"></script>
+    <script src="{{ asset('js/incomeTransactionEditAndDeleteModelHandler.js') }}"></script>
 </section>
