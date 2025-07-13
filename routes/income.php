@@ -11,3 +11,4 @@ Route::post('/income-delete',[IncomeDetailsController::class, 'delete'])->name('
 Route::post('/income-add',[IncomeDetailsController::class, 'addNewIncome'])->name('income.add');
 Route::post('/income',[IncomeDetailsController::class, 'find'])->name('income.find');
 Route::post('/income-Transaction-update',[IncomeDetailsController::class, 'incomeTransactionUpdate'])->name('incomeTransactionUpdate.update');
+Route::post('/income-Transaction-delete',[IncomeDetailsController::class, 'incomeTransactionDelete'])->name('incomeTransactionDelete.delete');
