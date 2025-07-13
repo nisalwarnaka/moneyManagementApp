@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('expense_types', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->integer('expense_type');
-            $table->string('max_amount');
+            $table->string('expense_type');
+            $table->integer('max_amount');
             $table->integer('min_amount');
             $table->timestamps();
         });
