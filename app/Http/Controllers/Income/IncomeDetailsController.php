@@ -20,10 +20,12 @@ class IncomeDetailsController extends Controller
     {
 
         $allIncomeData = Incometype::all();
+        $allIncomeTransactionsData = IncomeValue::all();
+        $results = IncomeValue::all();
         //$allIncomeData = Incometype::all()->pluck('id');
 
         Log::info($allIncomeData);
-        return view('income.income-details',compact('allIncomeData'));
+        return view('income.income-details',compact('allIncomeData','allIncomeTransactionsData','results'));
 
     }
 
@@ -88,6 +90,34 @@ class IncomeDetailsController extends Controller
            'month' => $validatedIncomeRequest['incomeMonthInCreateIncome'],
        ]);
        return redirect()->back()->with('message', 'Income-added-successfully.');
+   }
+
+   public function find(Request $request) : string
+   {
+
+       $findIncomeType = $request->incomeTypeForFind;
+       $findTransactionMonth = $request->transactionMonthForFind;
+       $findTransactionDate = $request->transactionDateForFind;
+
+       $query = IncomeValue::query();
+
+       // Filter by full date
+       if ($findIncomeType != null) {
+           $query->where('income_type_id', $findIncomeType);
+       }
+       if ($findTransactionMonth != null) {
+           $query->where('month', $findTransactionMonth);
+       }
+       if ($findTransactionDate != null) {
+           $query->whereDate('created_at', $findTransactionDate);
+       }
+       $results = $query->get();
+       $allIncomeData = Incometype::all();
+       $allIncomeTransactionsData = IncomeValue::all();
+
+       return view('income.income-details',compact('results', 'allIncomeData','allIncomeTransactionsData'));
+
+
    }
 
 }
