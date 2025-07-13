@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Income;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IncomeCreateRequest;
 use App\Http\Requests\IncomeTypeCreateRequest;
 use App\Http\Requests\IncomeTypeUpdateRequest;
+use App\Models\IncomeValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -48,7 +50,6 @@ class IncomeDetailsController extends Controller
     {
         $validatedIncomeRequest = $request->validated();
 
-
         if (Incometype::where('income_type', $validatedIncomeRequest['incomeType'])->exists()) {
 
             return redirect()->back()->with('message', 'Update Fail !! Income-type-already-exists.');
@@ -74,6 +75,20 @@ class IncomeDetailsController extends Controller
 
         return redirect()->back()->with('message', 'Income-type-delete-successfully.');
     }
+
+   public function addNewIncome(IncomeCreateRequest $request)
+   {
+       $validatedIncomeRequest = $request->validated();
+        //dd($validatedIncomeRequest);
+       IncomeValue::create([
+           'income_type_id' => $validatedIncomeRequest['selectedIncomeIdInCreateIncome'],
+           'income_type' => $validatedIncomeRequest['selectedIncomeNameInCreateIncome'],
+           'income_value' => $validatedIncomeRequest['incomeValueInCreateIncome'],
+           'special_note' => $validatedIncomeRequest['incomeSpecialNoteInCreateIncome'],
+           'month' => $validatedIncomeRequest['incomeMonthInCreateIncome'],
+       ]);
+       return redirect()->back()->with('message', 'Income-added-successfully.');
+   }
 
 }
 
