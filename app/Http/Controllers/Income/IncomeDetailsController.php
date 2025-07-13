@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\IncomeCreateRequest;
 use App\Http\Requests\IncomeTypeCreateRequest;
 use App\Http\Requests\IncomeTypeUpdateRequest;
+use App\Http\Requests\IncomeUpdateRequest;
 use App\Models\IncomeValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -78,7 +79,7 @@ class IncomeDetailsController extends Controller
         return redirect()->back()->with('message', 'Income-type-delete-successfully.');
     }
 
-   public function addNewIncome(IncomeCreateRequest $request)
+   public function addNewIncome(IncomeCreateRequest $request) : string
    {
        $validatedIncomeRequest = $request->validated();
         //dd($validatedIncomeRequest);
@@ -101,7 +102,7 @@ class IncomeDetailsController extends Controller
 
        $query = IncomeValue::query();
 
-       // Filter by full date
+
        if ($findIncomeType != null) {
            $query->where('income_type_id', $findIncomeType);
        }
@@ -117,6 +118,18 @@ class IncomeDetailsController extends Controller
 
        return view('income.income-details',compact('results', 'allIncomeData','allIncomeTransactionsData'));
 
+   }
+
+   public function incomeTransactionUpdate(IncomeUpdateRequest $request) : string
+   {
+       $validatedIncomeUpdateRequest = $request->validated();
+
+       IncomeValue::where('id', $validatedIncomeUpdateRequest['incomeTransactionId'])->update([
+           'income_value' => $validatedIncomeUpdateRequest['incomeTransactionValue'],
+           'special_note' => $validatedIncomeUpdateRequest['incomeTransactionSpecialNote'],
+           'month' => $validatedIncomeUpdateRequest['incomeTransactionMonth']
+       ]);
+       return redirect()->back()->with('message', 'Income-transaction-update-successfully.');
 
    }
 
