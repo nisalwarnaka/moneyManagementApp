@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'Income-type-added-successfully.' || session('message') === 'Income-type-update-successfully.' || session('message') === 'Income-type-delete-successfully.')
+        @if (session('message') === 'Income-type-added-successfully.' || session('message') === 'Income-type-update-successfully.' || session('message') === 'Income-type-delete-successfully.' || session('message') === 'Income-added-successfully.')
             <br>
             <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                 <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
