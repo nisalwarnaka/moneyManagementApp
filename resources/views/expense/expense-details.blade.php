@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'Expense-type-added-successfully.' || session('message') === 'Expense-type-update-successfully.')
+        @if (session('message') === 'Expense-type-added-successfully.' || session('message') === 'Expense-type-update-successfully.' || session('message') === 'Income-type-delete-successfully.')
             <br>
             <div id="alert-1"
                  class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
