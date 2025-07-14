@@ -7,16 +7,16 @@
                 <thead class="text-xs text-gray-900 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                        Income Type
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Max Amount
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
+                        MIn Amount
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                        Income Type Id
                     </th>
                     <th scope="col" class="px-4 py-3">
                         Action

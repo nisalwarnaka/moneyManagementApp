@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'Expense-type-added-successfully.')
+        @if (session('message') === 'Expense-type-added-successfully.' || session('message') === 'Expense-type-update-successfully.')
             <br>
             <div id="alert-1"
                  class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
@@ -34,7 +34,7 @@
         @endif
     </div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'fail !! Expense-type-already-exists.')
+        @if (session('message') === 'fail !! Expense-type-already-exists.' || session('message') === 'Update Fail !! Expense-type-already-exists.')
             <br>
             <div id="alert-1"
                  class="flex items-center p-4 mb-4 text-white rounded-lg bg-red-50 dark:bg-red-800 dark:text-white"
@@ -85,7 +85,7 @@
             </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-full">
-                    this is expense interface
+                    @include('profile.partials.update-expense-type')
                 </div>
             </div>
         </div>
