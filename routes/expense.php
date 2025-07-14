@@ -6,4 +6,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/expense',[ExpenseDetailsController::class, 'index'])->name('expense.index');
-Route::post('/expense',[ExpenseDetailsController::class, 'expenseTypeCreate'])->name('expenseType.create');
+Route::post('/expense-create',[ExpenseDetailsController::class, 'expenseTypeCreate'])->name('expenseType.create');
+Route::post('/expense-update',[ExpenseDetailsController::class, 'expenseTypeUpdate'])->name('expenseType.update');
