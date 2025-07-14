@@ -7,11 +7,11 @@ function openExpenseTypeEditModal(button){
     document.getElementById('ExpenseTypeIdModel').value = button.getAttribute('data-id');
 }
 
-function openDeleteModal(button)
+function openExpenseTypeDeleteModal(button)
 {
-    document.getElementById('incomeTypeShowInHeader').textContent = button.getAttribute('data-income_type');
-    document.getElementById('incomeIdShowInHeader').textContent = button.getAttribute('data-id');
-    document.getElementById('incomeIdDelete').value = button.getAttribute('data-id');
+    document.getElementById('ExpenseTypeDeleteModelText').textContent = button.getAttribute('data-income_type');
+    document.getElementById('ExpenseTypeIdDeleteModelText').textContent = button.getAttribute('data-id');
+    document.getElementById('ExpenseTypeIdDeleteModel').value = button.getAttribute('data-id');
 }
 
 

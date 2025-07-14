@@ -49,7 +49,8 @@
                                     data-modal-target="ExpenseTypeEditModel" data-modal-toggle="ExpenseTypeEditModel" onclick="openExpenseTypeEditModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                         </td>
                         <td class="px-6 py-4">
-                            <button data-modal-target="ExpenseTypeDeleteModel" data-modal-toggle="ExpenseTypeDeleteModel" onclick="openExpenseTypeDeleteModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                            <button data-id="{{$allExpenseTypes->id }}"
+                                    data-income_type="{{ $allExpenseTypes->expense_type }}" data-modal-target="ExpenseTypeDeleteModel" data-modal-toggle="ExpenseTypeDeleteModel" onclick="openExpenseTypeDeleteModal(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
                         </td>
 
 
@@ -99,7 +100,7 @@
                                         <label for="" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-blue-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Min Amount</label>
                                     </div>
                                     <div class="relative z-0 w-full mb-5 group">
-                                        <input type="text" name="ExpenseTypeIdModel" id="ExpenseTypeIdModel" required />
+                                        <input type="hidden" name="ExpenseTypeIdModel" id="ExpenseTypeIdModel" required />
 
                                     </div>
                                 </div>
@@ -114,7 +115,7 @@
                 </div>
             </div>
 
-                <form action="" method="post" onsubmit="return confirm('Are you sure? want to delete this income type !');">
+                <form action="{{Route('expenseType.delete')}}" method="post" onsubmit="return confirm('Are you sure? want to delete this income type !');">
                     @csrf
                     <div id="ExpenseTypeDeleteModel" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
@@ -129,11 +130,11 @@
                                     <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                     </svg>
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-white">Are you sure you want to delete this<br><span id=""></span><span class="dark:text-red-500"> -</span>: <span id=""></span><br> Income Type ?</h3>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-white">Are you sure you want to delete this<br><span id="ExpenseTypeDeleteModelText"></span><span class="dark:text-red-500"> -</span>: <span id="ExpenseTypeIdDeleteModelText"></span><br> Income Type ?</h3>
 
-                                    <input type="text" name="" id="" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                    <input type="text" name="ExpenseTypeIdDeleteModel" id="ExpenseTypeIdDeleteModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
 
-                                    <button data-modal-hide="ExpenseTypeDeleteModel" type="button" class="text-white bg-red-700  dark:border-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="ExpenseTypeDeleteModel" type="submit" class="text-white bg-red-700  dark:border-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Delete
                                     </button>
                                     <button data-modal-hide="ExpenseTypeDeleteModel" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-white dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>

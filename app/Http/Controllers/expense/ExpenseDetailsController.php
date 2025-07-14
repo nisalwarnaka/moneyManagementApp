@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseTypeCreateRequest;
 use App\Http\Requests\ExpenseTypeUpdateRequest;
 use App\Models\ExpenseType;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ExpenseDetailsController extends Controller
@@ -38,7 +40,7 @@ class ExpenseDetailsController extends Controller
 
     }
 
-    public function expenseTypeUpdate(ExpenseTypeUpdateRequest $request)
+    public function expenseTypeUpdate(ExpenseTypeUpdateRequest $request) : string
     {
         $validatedExpenseRequest = $request->validated();
 
@@ -77,6 +79,20 @@ class ExpenseDetailsController extends Controller
             return redirect()->back()->with('message', 'Expense-type-update-successfully.');
 
         }
+
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function expenseTypeDelete(Request $request) : string
+    {
+        $id = $request->get('ExpenseTypeIdDeleteModel');
+
+        ExpenseType::destroy($id);
+
+        return redirect()->back()->with('message', 'Income-type-delete-successfully.');
 
     }
 }
