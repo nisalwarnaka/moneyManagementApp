@@ -132,7 +132,7 @@
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-white">Are you sure you want to delete this<br><span id="ExpenseTypeDeleteModelText"></span><span class="dark:text-red-500"> -</span>: <span id="ExpenseTypeIdDeleteModelText"></span><br> Income Type ?</h3>
 
-                                    <input type="text" name="ExpenseTypeIdDeleteModel" id="ExpenseTypeIdDeleteModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                    <input type="hidden" name="ExpenseTypeIdDeleteModel" id="ExpenseTypeIdDeleteModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
 
                                     <button data-modal-hide="ExpenseTypeDeleteModel" type="submit" class="text-white bg-red-700  dark:border-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Delete
