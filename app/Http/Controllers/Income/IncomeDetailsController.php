@@ -53,14 +53,33 @@ class IncomeDetailsController extends Controller
     {
         $validatedIncomeRequest = $request->validated();
 
-        if (IncomeType::where('income_type', $validatedIncomeRequest['incomeType'])->exists()) {
+        if (IncomeType::where('income_type', $validatedIncomeRequest['incomeTypeModel'])->exists()) {
+
+            $query = IncomeType::query();
+
+            $query->where('income_type', $validatedIncomeRequest['incomeTypeModel']);
+
+            $SelectIncomeType = $query->get();
+            $SelectIncomeTypeId = $SelectIncomeType[0]->id;
+
+            if ($SelectIncomeTypeId == $validatedIncomeRequest['incomeId'])
+            {
+                IncomeType::where('id', $validatedIncomeRequest['incomeId'])->update([
+                    'income_type' => $validatedIncomeRequest['incomeTypeModel'],
+                    'max_amount' => $validatedIncomeRequest['maxAmount'],
+                    'min_amount' => $validatedIncomeRequest['minAmount']
+                ]);
+
+                return redirect()->back()->with('message', 'Income-type-update-successfully.');
+
+            }
 
             return redirect()->back()->with('message', 'Update Fail !! Income-type-already-exists.');
         }
 
 
         IncomeType::where('id', $validatedIncomeRequest['incomeId'])->update([
-            'income_type' => $validatedIncomeRequest['incomeType'],
+            'income_type' => $validatedIncomeRequest['incomeTypeModel'],
             'max_amount' => $validatedIncomeRequest['maxAmount'],
             'min_amount' => $validatedIncomeRequest['minAmount']
         ]);

@@ -38,23 +38,45 @@ class ExpenseDetailsController extends Controller
 
     }
 
-    public function expenseTypeUpdate(ExpenseTypeUpdateRequest $request):string
+    public function expenseTypeUpdate(ExpenseTypeUpdateRequest $request)
     {
         $validatedExpenseRequest = $request->validated();
 
         if (ExpenseType::where('expense_type', $validatedExpenseRequest['ExpenseTypeModel'])->exists()) {
 
+
+            $query = ExpenseType::query();
+
+            $query->where('expense_type', $validatedExpenseRequest['ExpenseTypeModel']);
+
+            $SelectExpenseType = $query->get();
+            $SelectExpenseTypeId = $SelectExpenseType[0]->id;
+
+           if ($SelectExpenseTypeId == $validatedExpenseRequest['ExpenseTypeIdModel'])
+           {
+               ExpenseType::where('id', $validatedExpenseRequest['ExpenseTypeIdModel'])->update([
+                   'expense_type' => $validatedExpenseRequest['ExpenseTypeModel'],
+                   'max_amount' => $validatedExpenseRequest['ExpenseMaxAmountModel'],
+                   'min_amount' => $validatedExpenseRequest['ExpenseMinAmountModel']
+               ]);
+
+               return redirect()->back()->with('message', 'Expense-type-update-successfully.');
+
+           }
+
             return redirect()->back()->with('message', 'Update Fail !! Expense-type-already-exists.');
         }
+        else{
 
+            ExpenseType::where('id', $validatedExpenseRequest['ExpenseTypeIdModel'])->update([
+                'expense_type' => $validatedExpenseRequest['ExpenseTypeModel'],
+                'max_amount' => $validatedExpenseRequest['ExpenseMaxAmountModel'],
+                'min_amount' => $validatedExpenseRequest['ExpenseMinAmountModel']
+            ]);
 
-        ExpenseType::where('id', $validatedExpenseRequest['ExpenseTypeIdModel'])->update([
-            'expense_type' => $validatedExpenseRequest['ExpenseTypeModel'],
-            'max_amount' => $validatedExpenseRequest['ExpenseMaxAmountModel'],
-            'min_amount' => $validatedExpenseRequest['ExpenseMinAmountModel']
-        ]);
+            return redirect()->back()->with('message', 'Expense-type-update-successfully.');
 
-        return redirect()->back()->with('message', 'Expense-type-update-successfully.');
+        }
 
     }
 }

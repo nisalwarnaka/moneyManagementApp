@@ -22,7 +22,7 @@ class IncomeTypeUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'incomeType' => ['required'],
+            'incomeTypeModel' => ['required'],
             'maxAmount' => ['required'],
             'minAmount' => ['required'],
             'incomeId' => ['required'],
