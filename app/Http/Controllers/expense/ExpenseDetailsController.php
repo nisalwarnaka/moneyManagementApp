@@ -97,14 +97,29 @@ class ExpenseDetailsController extends Controller
     {
         $validatedExpenseRequest = $request->validated();
 
-        ExpenseValue::create([
-            'expense_type_id' => $validatedExpenseRequest['ExpenseTypeIdForAddNewExpense'],
-            'expense_type' => $validatedExpenseRequest['ExpenseTypeForAddNewExpense'],
-            'expense_value' => $validatedExpenseRequest['ExpenseValueForAddNewExpense'],
-            'special_note' => $validatedExpenseRequest['SpecialNoteForAddNewExpense'],
-            'month' => $validatedExpenseRequest['TransactionMonthForAddNewExpense'],
-        ]);
-        return redirect()->back()->with('message', 'Expense-added-successfully.');
+        $query = ExpenseType::query();
+
+        $query->where('id', $validatedExpenseRequest['ExpenseTypeIdForAddNewExpense']);
+
+        $SelectExpenseType = $query->get();
+        $SelectExpenseTypeMaxAmount = $SelectExpenseType[0]->max_amount;
+        $SelectExpenseTypeMinAmount = $SelectExpenseType[0]->min_amount;
+
+
+       if ($SelectExpenseTypeMaxAmount >= $validatedExpenseRequest['ExpenseValueForAddNewExpense'] & $SelectExpenseTypeMinAmount <= $validatedExpenseRequest['ExpenseValueForAddNewExpense'])
+       {
+           ExpenseValue::create([
+               'expense_type_id' => $validatedExpenseRequest['ExpenseTypeIdForAddNewExpense'],
+               'expense_type' => $validatedExpenseRequest['ExpenseTypeForAddNewExpense'],
+               'expense_value' => $validatedExpenseRequest['ExpenseValueForAddNewExpense'],
+               'special_note' => $validatedExpenseRequest['SpecialNoteForAddNewExpense'],
+               'month' => $validatedExpenseRequest['TransactionMonthForAddNewExpense'],
+           ]);
+           return redirect()->back()->with('message', 'Expense-added-successfully.');
+
+       }
+
+        return redirect()->back()->with('message', 'fail !! Check-Expense-Value-Limitations.');
 
 
     }
