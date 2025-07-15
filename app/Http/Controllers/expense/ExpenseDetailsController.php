@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\expenseCreateRequest;
 use App\Http\Requests\ExpenseTypeCreateRequest;
 use App\Http\Requests\ExpenseTypeUpdateRequest;
+use App\Http\Requests\ExpenseUpdateRequest;
 use App\Models\ExpenseType;
 use App\Models\ExpenseValue;
 use Illuminate\Http\Request;
@@ -19,8 +20,9 @@ class ExpenseDetailsController extends Controller
     {
 
         $allExpenseData = ExpenseType :: all();
+        $results = ExpenseValue::all();
 
-        return view('expense.expense-details' , compact('allExpenseData'));
+        return view('expense.expense-details' , compact('allExpenseData' , 'results'));
 
     }
 
@@ -121,6 +123,44 @@ class ExpenseDetailsController extends Controller
 
         return redirect()->back()->with('message', 'fail !! Check-Expense-Value-Limitations.');
 
+    }
+
+    public function findExpense(Request $request)
+    {
+
+        $findExpenseType = $request->ExpenseTypeForFinder;
+        $findTransactionMonth = $request->ExpenseMonthForFinder;
+        $findTransactionDate = $request->ExpenseDateForFinder;
+
+        $query = ExpenseValue::query();
+
+
+        if ($findExpenseType != null) {
+            $query->where('expense_type_id', $findExpenseType);
+        }
+        if ($findTransactionMonth != null) {
+            $query->where('month', $findTransactionMonth);
+        }
+        if ($findTransactionDate != null) {
+            $query->whereDate('created_at', $findTransactionDate);
+        }
+        $results = $query->get();
+        $allExpenseData = ExpenseType :: all();
+
+        return view('expense.expense-details',compact('results', 'allExpenseData'));
+    }
+
+    public function editExpenseTransaction(ExpenseUpdateRequest $request) : string
+    {
+
+        $validatedExpenseUpdateRequest = $request->validated();
+
+        ExpenseValue::where('id', $validatedExpenseUpdateRequest['ExpenseTransactionIdForEditModel'])->update([
+            'expense_value' => $validatedExpenseUpdateRequest['ExpenseValueForEditModel'],
+            'special_note' => $validatedExpenseUpdateRequest['ExpenseSpecialNoteForEditModel'],
+            'month' => $validatedExpenseUpdateRequest['ExpenseMonthForEditModel']
+        ]);
+        return redirect()->back()->with('message', 'Expense-transaction-update-successfully.');
 
     }
 }

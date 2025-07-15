@@ -10,3 +10,5 @@ Route::post('/expense-create',[ExpenseDetailsController::class, 'expenseTypeCrea
 Route::post('/expense-update',[ExpenseDetailsController::class, 'expenseTypeUpdate'])->name('expenseType.update');
 Route::post('/expense-delete',[ExpenseDetailsController::class, 'expenseTypeDelete'])->name('expenseType.delete');
 Route::post('/expense-add',[ExpenseDetailsController::class, 'addNewExpense'])->name('newExpense.add');
+Route::post('/expense',[ExpenseDetailsController::class, 'findExpense'])->name('findExpense.find');
+Route::post('/expense-edit',[ExpenseDetailsController::class, 'editExpenseTransaction'])->name('editExpenseTransaction.edit');

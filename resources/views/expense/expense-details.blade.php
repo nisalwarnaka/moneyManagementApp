@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'Expense-type-added-successfully.' || session('message') === 'Expense-type-update-successfully.' || session('message') === 'Expense-type-delete-successfully.' || session('message') === 'Expense-added-successfully.')
+        @if (session('message') === 'Expense-type-added-successfully.' || session('message') === 'Expense-type-update-successfully.' || session('message') === 'Expense-type-delete-successfully.' || session('message') === 'Expense-added-successfully.' || session('message') === 'Expense-transaction-update-successfully.')
             <br>
             <div id="alert-1"
                  class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
@@ -68,7 +68,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-full">
-                    this is expense interface
+                    @include('profile.partials.show-expense-transactions')
                 </div>
             </div>
 
