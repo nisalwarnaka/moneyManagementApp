@@ -163,4 +163,14 @@ class ExpenseDetailsController extends Controller
         return redirect()->back()->with('message', 'Expense-transaction-update-successfully.');
 
     }
+
+    public function deleteExpenseTransaction(Request $request) : string
+    {
+
+        $id = $request->get('ExpenseTransactionIdForModelDelete');
+
+        ExpenseValue::destroy($id);
+
+        return redirect()->back()->with('message', 'Expense-Transaction-delete-successfully.');
+    }
 }

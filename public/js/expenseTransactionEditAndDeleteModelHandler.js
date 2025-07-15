@@ -10,9 +10,9 @@ function openExpenseTransactionEditModal(button){
 
 function openExpenseTransactionDeleteModal(button)
 {
-    document.getElementById('incomeTransactionTypeForText').textContent = button.getAttribute('data-income-type');
-    document.getElementById('incomeTransactionIdForText').textContent = button.getAttribute('data-transaction-id');
-    document.getElementById('incomeTransactionIdForDelete').value = button.getAttribute('data-transaction-id');
+    document.getElementById('ExpenseTypeForModelDeleteText').textContent = button.getAttribute('data-expense-type');
+    document.getElementById('ExpenseTransactionIdForModelDeleteText').textContent = button.getAttribute('data-expense-transaction-id');
+    document.getElementById('ExpenseTransactionIdForModelDelete').value = button.getAttribute('data-expense-transaction-id');
 }
 
 
