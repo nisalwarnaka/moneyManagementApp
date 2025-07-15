@@ -101,15 +101,29 @@ class IncomeDetailsController extends Controller
    public function addNewIncome(IncomeCreateRequest $request) : string
    {
        $validatedIncomeRequest = $request->validated();
-        //dd($validatedIncomeRequest);
-       IncomeValue::create([
-           'income_type_id' => $validatedIncomeRequest['selectedIncomeIdInCreateIncome'],
-           'income_type' => $validatedIncomeRequest['selectedIncomeNameInCreateIncome'],
-           'income_value' => $validatedIncomeRequest['incomeValueInCreateIncome'],
-           'special_note' => $validatedIncomeRequest['incomeSpecialNoteInCreateIncome'],
-           'month' => $validatedIncomeRequest['incomeMonthInCreateIncome'],
-       ]);
-       return redirect()->back()->with('message', 'Income-added-successfully.');
+       $query = IncomeType::query();
+
+       $query->where('id', $validatedIncomeRequest['selectedIncomeIdInCreateIncome']);
+
+       $SelectIncomeType = $query->get();
+       $SelectIncomeTypeMaxAmount = $SelectIncomeType[0]->max_amount;
+       $SelectIncomeTypeMinAmount = $SelectIncomeType[0]->min_amount;
+
+
+       if ($SelectIncomeTypeMaxAmount >= $validatedIncomeRequest['incomeValueInCreateIncome'] & $SelectIncomeTypeMinAmount <= $validatedIncomeRequest['incomeValueInCreateIncome'])
+       {
+           IncomeValue::create([
+               'income_type_id' => $validatedIncomeRequest['selectedIncomeIdInCreateIncome'],
+               'income_type' => $validatedIncomeRequest['selectedIncomeNameInCreateIncome'],
+               'income_value' => $validatedIncomeRequest['incomeValueInCreateIncome'],
+               'special_note' => $validatedIncomeRequest['incomeSpecialNoteInCreateIncome'],
+               'month' => $validatedIncomeRequest['incomeMonthInCreateIncome'],
+           ]);
+           return redirect()->back()->with('message', 'Income-added-successfully.');
+       }
+
+       return redirect()->back()->with('message', 'fail !! Check-Income-Value-Limitations.');
+
    }
 
    public function find(Request $request) : string

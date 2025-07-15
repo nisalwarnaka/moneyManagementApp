@@ -34,7 +34,7 @@
         @endif
     </div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        @if (session('message') === 'Update Fail !! Income-type-already-exists.' || session('message') === 'fail !! Income-type-already-exists.')
+        @if (session('message') === 'Update Fail !! Income-type-already-exists.' || session('message') === 'fail !! Income-type-already-exists.' || session('message') === 'fail !! Check-Income-Value-Limitations.')
             <br>
             <div id="alert-1"
                  class="flex items-center p-4 mb-4 text-white rounded-lg bg-red-50 dark:bg-red-800 dark:text-white"
